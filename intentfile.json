@@ -1,45 +1,53 @@
 {
-  "ASes": {
-    "X": {
-      "name": "AS X",
-      "as_number": 101,
-      "igp": "RIPng",
-      "link_ip_range": "2001:db8:0:10::/64",
-      "loopback_ip_range": "2001:db8:0:11::/64"
+  "AS": {
+    "101": {
+      "igp": "RIP",
+      "add_range": "",
+      "loopback" : "",
+      "routers": {"R1": {
+        "interfaces": {
+          "GigabitEthernet1/0": {"ipv6": "", "ngbr" : "R2"}
+      }
+      },
+      "R2": {
+        "interfaces": {
+          "GigabitEthernet1/0": {"ipv6": "", "ngbr" : "R1"},
+          "GigabitEthernet2/0": {"ipv6": "", "ngbr" : "R3"}
+        }
+      },
+      "R3": {
+        "interfaces": {
+          "GigabitEthernet1/0": {"ipv6": "", "ngbr" : "R4"},
+          "GigabitEthernet2/0": {"ipv6": "", "ngbr" : "R2"}
+        }
+      }
+    }
+  },
+
+    "102": {
+      "igp": "OSPF",
+      "add_range": "",
+      "loopback" : "",
+      "routers": 
+      {"R4": {
+        "interfaces": {
+          "GigabitEthernet1/0": {"ipv6": "", "ngbr" : "R5"},
+          "GigabitEthernet2/0": {"ipv6": "", "ngbr" : "R3"}
+        }
     },
-    "Y": {
-      "name": "AS Y",
-      "as_number": 102,
-      "igp": "OSPFv3",
-      "link_ip_range": "2001:db8:0:20::/64",
-      "loopback_ip_range": "2001:db8:0:21::/64"
+    "R5": {
+        "interfaces": {
+          "GigabitEthernet1/0": {"ipv6": "", "ngbr" : "R6"},
+          "GigabitEthernet2/0": {"ipv6": "", "ngbr" : "R4"}
+        }
+      },
+    "R6": {
+        "interfaces": {
+          "GigabitEthernet1/0": {"ipv6": "", "ngbr" : "R5"}
+        }
+      }
     }
-  },
-
-    "routers": {
-    "XR1": { "as": "X" },
-    "XR2": { "as": "X" },
-    "XR3": { "as": "X" },
-
-    "YR1": { "as": "Y" },
-    "YR2": { "as": "Y" },
-    "YR3": { "as": "Y" }
-  },
-
-    "links": [
-    { "r1": "XR1", "if1": "GigabitEthernet0/0", "r2": "XR2", "if2": "GigabitEthernet0/0" },
-    { "r1": "XR2", "if1": "GigabitEthernet0/1", "r2": "XR3", "if2": "GigabitEthernet0/0" },
-
-    { "r1": "YR1", "if1": "GigabitEthernet0/0", "r2": "YR2", "if2": "GigabitEthernet0/0" },
-    { "r1": "YR2", "if1": "GigabitEthernet0/1", "r2": "YR3", "if2": "GigabitEthernet0/0" },
-
-    {
-      "r1": "XR3",
-      "if1": "GigabitEthernet0/1",
-      "r2": "YR3",
-      "if2": "GigabitEthernet0/1",
-      "type": "eBGP"
-    }
-  ]
+}
+}
 }
 
