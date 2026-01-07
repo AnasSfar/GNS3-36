@@ -14,17 +14,32 @@
       "link_ip_range": "2001:db8:0:20::/64",
       "loopback_ip_range": "2001:db8:0:21::/64"
     }
-  }
-}
+  },
 
-{
-    "Routers" : {
-    { "name": "X1", "as": "X" },
-    { "name": "X2", "as": "X" },
-    { "name": "X3", "as": "X" },
-    { "name": "Y1", "as": "Y" },
-    { "name": "Y2", "as": "Y" },
-    { "name": "Y3", "as": "Y" },
+    "routers": {
+    "XR1": { "as": "X" },
+    "XR2": { "as": "X" },
+    "XR3": { "as": "X" },
+
+    "YR1": { "as": "Y" },
+    "YR2": { "as": "Y" },
+    "YR3": { "as": "Y" }
+  },
+
+    "links": [
+    { "r1": "XR1", "if1": "GigabitEthernet0/0", "r2": "XR2", "if2": "GigabitEthernet0/0" },
+    { "r1": "XR2", "if1": "GigabitEthernet0/1", "r2": "XR3", "if2": "GigabitEthernet0/0" },
+
+    { "r1": "YR1", "if1": "GigabitEthernet0/0", "r2": "YR2", "if2": "GigabitEthernet0/0" },
+    { "r1": "YR2", "if1": "GigabitEthernet0/1", "r2": "YR3", "if2": "GigabitEthernet0/0" },
+
+    {
+      "r1": "XR3",
+      "if1": "GigabitEthernet0/1",
+      "r2": "YR3",
+      "if2": "GigabitEthernet0/1",
+      "type": "eBGP"
     }
+  ]
 }
 
