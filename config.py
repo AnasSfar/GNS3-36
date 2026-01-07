@@ -8,4 +8,3 @@ with open("intentfile.json") as f:
 ases = intent["ases"]
 routers_def = intent["routers"]
 links = intent["links"]
-
